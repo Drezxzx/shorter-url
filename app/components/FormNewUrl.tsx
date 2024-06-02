@@ -19,7 +19,7 @@ export default function FormNewUrl() {
         }
         try {
             setError("")
-            const res = await fetch("/api/urls", {
+            const res = await fetch("/api/u", {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json"

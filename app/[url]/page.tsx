@@ -9,7 +9,9 @@ type Props = {
 export default function Page(params : Props) {
     useEffect(()=>{
         fechtData(params.params.url)
-        .then(url  => {location.href = url})
+        .then(url  => {
+            if(url === undefined) return
+            location.href = url})
     },[params.params.url])
     
     return (

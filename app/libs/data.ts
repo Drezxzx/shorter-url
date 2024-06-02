@@ -2,27 +2,22 @@ import { createClient } from "@libsql/client";
 
 
 const client = createClient({
-  url: process.env.TURSO_DATABASE_URL as string,
-  authToken: process.env.TURSO_AUTH_TOKEN,
+  url: "http://127.0.0.1:8080"
 });
 
 
  export  async function fechtData(url : string) {
-  try {
     console.log(process.env.TURSO_DATABASE_URL);
     
     console.log('Parámetro URL:', url);
-
-    const sql = await client.execute({
-      sql: `SELECT url FROM URL WHERE newurl = ?`,
-      args: [url]
-    });
-   
-    console.log('Resultado de la consulta:', sql.rows);
-    return sql.rows[0].url as string
-      
-  } catch (error) {
-    console.error('Error al ejecutar la consulta:', error);
-    throw new Error('Error al ejecutar la consulta');
-  }
+    try {
+      const data = await fetch(`/api/o?url=${url}`
+    )
+    
+    const res = await data.json()
+    console.log(res); 
+    return res.url as string
+    } catch (error) {
+      console.error(error);
+    }
 }

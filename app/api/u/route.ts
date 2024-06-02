@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from "@libsql/client";
-import { NextApiRequest } from 'next';
 
 const client = createClient({
   url: process.env.TURSO_DATABASE_URL as string,
