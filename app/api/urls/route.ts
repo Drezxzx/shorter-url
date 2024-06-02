@@ -19,7 +19,7 @@ export async function POST(request: NextRequest) {
     console.log(error);
     return NextResponse.json({msg:"Esta URL ya esta en nuestra base de datos"},{status:400})
   }
-  return NextResponse.json({ msg: "URL added successfully", newurl:`http://localhost:3000/${newurl}` });
+  return NextResponse.json({ msg: "URL added successfully", newurl:`https://d-orcin-nine.vercel.app/${newurl}` });
 }
 
 function generateRandomWord(length: number) {
