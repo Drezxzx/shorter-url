@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { createClient } from "@libsql/client";
 import { NextApiRequest } from 'next';
 
@@ -7,7 +7,7 @@ const client = createClient({
   authToken: process.env.TURSO_AUTH_TOKEN,
 });
 
-export async function POST(request: NextResponse) {
+export async function POST(request: NextRequest) {
   const body = await request.json();
   const { url } = body;
   const newurl = generateRandomWord(5)
@@ -32,7 +32,7 @@ function generateRandomWord(length: number) {
   return result;
 }
 
-export async function DELETE(req : NextResponse) {
+export async function DELETE(req : NextRequest) {
   const body = await req.json()
   const {url} = body
 
