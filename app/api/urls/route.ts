@@ -1,41 +1,29 @@
 import { NextResponse } from 'next/server';
 import { createClient } from "@libsql/client";
+import { NextApiRequest } from 'next';
 
 const client = createClient({
-  url: "http://127.0.0.1:8080",
+  url: process.env.TURSO_DATABASE_URL as string,
+  authToken: process.env.TURSO_AUTH_TOKEN,
 });
-
-export async function GET() {
-  const sql = await client.execute("SELECT * FROM URL");
-  if (sql) {
-    console.log(JSON.stringify(sql.rows));
-  }
-  return NextResponse.json({data: sql.rows });
-}
 
 export async function POST(request: NextResponse) {
   const body = await request.json();
-  
-
   const { url } = body;
   const newurl = generateRandomWord(5)
   try {
     const sql = await client.execute(
-      `INSERT INTO URL (url, newurl) VALUES ('${url}', 'http://localhost:3000/${newurl}')`
+      `INSERT INTO URL (url, newurl) VALUES ('${url}', '${newurl}')`
     );
   } catch (error) {
     console.log(error);
-    return NextResponse.json({msg:"URL already exist"},{status:400})
+    return NextResponse.json({msg:"Esta URL ya esta en nuestra base de datos"},{status:400})
   }
-    
- 
-    
-  
   return NextResponse.json({ msg: "URL added successfully", newurl:`http://localhost:3000/${newurl}` });
 }
 
 function generateRandomWord(length: number) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
   let result = '';
   for (let i = 0; i < length; i++) {
     const randomIndex = Math.floor(Math.random() * characters.length);
