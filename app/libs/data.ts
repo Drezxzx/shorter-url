@@ -13,11 +13,11 @@ const client = createClient({
     
     console.log('Parámetro URL:', url);
 
-    // const sql = await client.execute({
-    //   sql: `SELECT url FROM URL WHERE newurl = ?`,
-    //   args: [url]
-    // });
-    return "hola"
+    const sql = await client.execute({
+      sql: `SELECT url FROM URL WHERE newurl = ?`,
+      args: [url]
+    });
+   
     console.log('Resultado de la consulta:', sql.rows);
     return sql.rows[0].url as string
       
