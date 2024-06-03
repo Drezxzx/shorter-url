@@ -10,6 +10,7 @@ export default function FormNewUrl() {
     const [result, setResult] = useState("")
     const [error, setError] = useState("")
     const [copy, setCopy] = useState(false)
+    const [loading, setLoading] = useState(false)
 
     const handleClick = async (e: React.MouseEvent<HTMLButtonElement>) => {
         e.preventDefault();
@@ -18,6 +19,8 @@ export default function FormNewUrl() {
             return false
         }
         try {
+            setLoading(true)
+            setResult("Cargando...")
             setError("")
             const res = await fetch("/api/u", {
                 method: "POST",
@@ -60,19 +63,20 @@ export default function FormNewUrl() {
     }
     const classname = error.length > 0 ? "border-red-400/90" : "border-slate-300/90"
     const classCapy = copy ? "bg-emerald-500 text-white" : "text-black"
+
     return (
         <form className="h-52 w-[50rem] flex justify-center items-center gap-4 p-2 flex-col">
             {error && <p className='text-xs font-semibold'>{error}</p>}
             <input type="text" className={`md:w-full w-[40%]  border transition-all ${classname} rounded-md focus:outline-none  p-2`} onChange={handleChange} placeholder="Introduce Tu Url" />
             <button className='p-2 w-28 hover:bg-emerald-500 transition-all hover:scale-105  bg-emerald-600 text-white font-semibold rounded-md' onClick={handleClick}>Acortar</button>
-            <Suspense fallback={<p>Cargando...</p>}>
-                {result &&
+            
+                {
+                result &&
                     <div className={`flex gap-4 p-1 justify-center items-center rounded-md `}>
                         <p>{result}</p>
-                        <button className={`${classCapy} border transition-all hover:scale-110  p-1 rounded-md`} onClick={handleCoppy}><IconCopy></IconCopy></button>
+                        <button hidden={loading} className={`${classCapy}  border transition-all hover:scale-110  p-1 rounded-md`} onClick={handleCoppy}><IconCopy></IconCopy></button>
                     </div>
                 }
-            </Suspense>
 
         </form>
     );
