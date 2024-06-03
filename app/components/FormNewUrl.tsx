@@ -1,5 +1,6 @@
 "use client";
 import React, { Suspense, useState } from 'react';
+import {RotatingLines} from 'react-loader-spinner'
 import { IconCopy } from '@tabler/icons-react'
 interface resUrl {
     msg: string;
@@ -7,7 +8,7 @@ interface resUrl {
 }
 export default function FormNewUrl() {
     const [url, setUrl] = useState("")
-    const [result, setResult] = useState("")
+    const [result, setResult] = useState<string | any>("")
     const [error, setError] = useState("")
     const [copy, setCopy] = useState(false)
     const [loading, setLoading] = useState(false)
@@ -20,7 +21,7 @@ export default function FormNewUrl() {
         }
         try {
             setLoading(true)
-            setResult("Cargando...")
+            setResult(<RotatingLines strokeColor='black' width='20' ></RotatingLines>)
             setError("")
             const res = await fetch("/api/u", {
                 method: "POST",
