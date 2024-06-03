@@ -34,11 +34,11 @@ export default function FormNewUrl() {
             const response = await res.json() as resUrl
             console.log(response);
             if (res.status !== 200) {
-                setResult("")
-                setLoading(false)
                 setError(response.msg)
                 throw new Error(response.msg)
             }
+            setResult("")
+            setLoading(false)
             setResult(response.newurl)
 
 
