@@ -1,6 +1,7 @@
 "use client"
 import {fechtData} from '@/app/libs/data'
 import { useEffect } from 'react'
+import "./styles.css"
 type Props = {
     params: {
         url: string
