@@ -5,8 +5,8 @@ import "./globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
-  title: "Digital Target Acortador",
-  description: "Acortador de digital target",
+  title: "Acortador url",
+  description: "Acortador url",
 };
 
 export default function RootLayout({
