@@ -19,6 +19,12 @@ export default function FormNewUrl() {
             setError("Introduzca una url")
             return false
         }
+
+        if(!url.includes("http://") && !url.includes("https://")){
+            setError("Introduzca una url valida")
+            return false
+        }
+
         try {
             setLoading(true)
             setResult(<RotatingLines strokeColor='black' width='20' ></RotatingLines>)
