@@ -73,9 +73,9 @@ export default function FormNewUrl() {
     const classCapy = copy ? "bg-emerald-500 text-white" : "text-black"
 
     return (
-        <form className="h-52 w-[50rem] flex justify-center items-center gap-4 p-2 flex-col">
+        <form className="h-52 md:w-[50rem] w-full   flex justify-center items-center gap-4 p-2 flex-col">
             {error && <p className='text-xs font-semibold'>{error}</p>}
-            <input type="text" className={`md:w-full w-[40%]  border transition-all ${classname} rounded-md focus:outline-none  p-2`} onChange={handleChange} placeholder="Introduce Tu Url" />
+            <input type="text" className={`md:w-full w-[80%]  border transition-all ${classname} rounded-md focus:outline-none  p-2`} onChange={handleChange} placeholder="Introduce Tu Url" />
             <button className='p-2 w-28 hover:bg-emerald-500 transition-all hover:scale-105  bg-emerald-600 text-white font-semibold rounded-md' onClick={handleClick}>Acortar</button>
             
                 {
