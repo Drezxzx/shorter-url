@@ -42,15 +42,17 @@ export default function FormNewUrl() {
             console.log(response);
             if (res.status !== 200) {
                 setError(response.msg)
+                setResult("")
+                setLoading(false)
                 throw new Error(response.msg)
             }
-            setResult("")
-            setLoading(false)
             setResult(response.newurl)
 
 
         } catch (error) {
             console.error(error);
+        } finally {
+            setLoading(false)
         }
 
 
